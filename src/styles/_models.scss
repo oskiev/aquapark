@@ -1,0 +1,38 @@
+.model {
+    position: relative;
+    margin-bottom: 40px;
+    background: transparent;
+
+    &-container {
+        position: absolute;
+        top: 0;
+        right: -240px;
+        background: $white;
+        padding: 30px 40px 20px;
+        height: 100%;
+        transition: all 150ms;
+        z-index: -1;
+
+        &.hidden {
+            right: 0px;
+            opacity: 0;
+        }
+    }
+    &-wrap {
+    }
+    span {
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 0.9em;
+    }
+
+    &-product {
+        display: block;
+        max-width: 160px;
+        margin: auto;
+        margin-bottom: 16px;
+        cursor: move;
+    }
+}

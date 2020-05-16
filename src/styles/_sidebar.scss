@@ -1,0 +1,78 @@
+.sidebar {
+    z-index: 9;
+    border-right: 1px solid #ddd;
+    height: 100%;
+    background: $white;
+
+    &-wrap {
+        position: relative;
+        width: 15%;
+        background: $white;
+        z-index: 9;
+        transition: width 200ms ease;
+    }
+
+    &-menu {
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+
+        & > span,
+        &-heading > span,
+        &-sub > span {
+            display: block;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.9em;
+            padding-bottom: 12px;
+            cursor: pointer;
+
+            &:last-child {
+                padding-bottom: 0px;
+            }
+            i {
+                display: inline-block;
+                padding-right: 6px;
+                color: #393939;
+            }
+            &:hover,
+            &:hover i,
+            &.active,
+            &.active i {
+                color: $orange;
+            }
+        }
+        &-heading {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &:hover {
+                color: $orange;
+            }
+        }
+        &-heading > span {
+            font-weight: 700;
+            padding-bottom: 0px;
+
+            &.no-padding {
+                padding-bottom: 0px;
+            }
+        }
+        &-sub {
+            display: none;
+            margin-top: 20px;
+
+            &.show {
+                display: block;
+            }
+        }
+        &-toggle {
+            //position: absolute;
+            //top: 0;
+            //right: 0;
+            cursor: pointer;
+            color: $orange;
+        }
+    }
+}

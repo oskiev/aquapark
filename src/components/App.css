@@ -1,0 +1,200 @@
+h1, h2, h3, h4, h5, h6 {
+  clear: both; }
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #000000;
+  font-size: 16px; }
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-top: 5px solid #ff4639;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10; }
+  .header-toggle {
+    margin-right: 40px;
+    cursor: pointer; }
+    .header-toggle i {
+      font-size: 26px; }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    width: 50%; }
+    .header-logo-img {
+      max-width: 110px; }
+  .header-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.10em;
+    z-index: -1; }
+  .header-menu {
+    width: 50%; }
+
+.sidebar {
+  z-index: 9;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  background: #ffffff; }
+  .sidebar-wrap {
+    position: relative;
+    width: 15%;
+    background: #ffffff;
+    z-index: 9;
+    transition: width 200ms ease; }
+  .sidebar-menu {
+    padding: 20px;
+    border-bottom: 1px solid #ddd; }
+    .sidebar-menu > span,
+    .sidebar-menu-heading > span,
+    .sidebar-menu-sub > span {
+      display: block;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 0.9em;
+      padding-bottom: 12px;
+      cursor: pointer; }
+      .sidebar-menu > span:last-child,
+      .sidebar-menu-heading > span:last-child,
+      .sidebar-menu-sub > span:last-child {
+        padding-bottom: 0px; }
+      .sidebar-menu > span i,
+      .sidebar-menu-heading > span i,
+      .sidebar-menu-sub > span i {
+        display: inline-block;
+        padding-right: 6px;
+        color: #393939; }
+      .sidebar-menu > span:hover,
+      .sidebar-menu > span:hover i, .sidebar-menu > span.active,
+      .sidebar-menu > span.active i,
+      .sidebar-menu-heading > span:hover,
+      .sidebar-menu-heading > span:hover i,
+      .sidebar-menu-heading > span.active,
+      .sidebar-menu-heading > span.active i,
+      .sidebar-menu-sub > span:hover,
+      .sidebar-menu-sub > span:hover i,
+      .sidebar-menu-sub > span.active,
+      .sidebar-menu-sub > span.active i {
+        color: #ff4639; }
+    .sidebar-menu-heading {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
+      .sidebar-menu-heading:hover {
+        color: #ff4639; }
+    .sidebar-menu-heading > span {
+      font-weight: 700;
+      padding-bottom: 0px; }
+      .sidebar-menu-heading > span.no-padding {
+        padding-bottom: 0px; }
+    .sidebar-menu-sub {
+      display: none;
+      margin-top: 20px; }
+      .sidebar-menu-sub.show {
+        display: block; }
+    .sidebar-menu-toggle {
+      cursor: pointer;
+      color: #ff4639; }
+
+.model {
+  position: relative;
+  margin-bottom: 40px;
+  background: transparent; }
+  .model-container {
+    position: absolute;
+    top: 0;
+    right: -240px;
+    background: #ffffff;
+    padding: 30px 40px 20px;
+    height: 100%;
+    transition: all 150ms;
+    z-index: -1; }
+    .model-container.hidden {
+      right: 0px;
+      opacity: 0; }
+  .model span {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.9em; }
+  .model-product {
+    display: block;
+    max-width: 160px;
+    margin: auto;
+    margin-bottom: 16px;
+    cursor: move; }
+
+.canvas {
+  position: relative;
+  background: #d7d7d7;
+  width: 85%;
+  z-index: 8;
+  transition: width 200ms ease;
+  border: 1px solid #ddd;
+  text-align: center;
+  color: #000000;
+  font-size: 30px;
+  font-weight: 700; }
+  .canvas img {
+    display: block;
+    margin: auto; }
+  .canvas .target {
+    position: relative;
+    width: 100%;
+    height: 100%; }
+    .canvas .target .model-product {
+      max-width: 100%;
+      margin-bottom: 0px; }
+  .canvas iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    z-index: -1; }
+
+* {
+  box-sizing: border-box; }
+
+body {
+  background: #ffffff;
+  overflow-x: hidden; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto; }
+
+.app {
+  position: relative;
+  width: 100%;
+  height: 100vh; }
+
+.content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-top: 93px;
+  max-height: 100vh; }
+  .content.toggleIcons .sidebar {
+    width: 5%; }
+  .content.toggleIcons .canvas {
+    width: 95%; }
