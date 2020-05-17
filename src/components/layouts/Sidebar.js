@@ -17,23 +17,23 @@ class Sidebar extends Component {
         return (
             <div className='sidebar'>
                 <div className='sidebar-menu'>
-                    <span><i className="fas fa-file-alt"></i> New Build</span>
-                    <span><i className="fas fa-folder-open"></i> Open</span>
+                    <span><i className="fas fa-file-alt"></i> <span className="sidebar-menu-name">New Build</span></span>
+                    <span><i className="fas fa-folder-open"></i> <span className="sidebar-menu-name">Open</span></span>
                 </div>
                 <div className="sidebar-menu">
-                    <span><i className="fas fa-save"></i> Save</span>
-                    <span><i className="fas fa-save"></i> Save as</span>
-                    <span><i className="fas fa-share"></i> Share</span>
+                    <span><i className="fas fa-save"></i> <span className="sidebar-menu-name">Save</span></span>
+                    <span><i className="fas fa-save"></i> <span className="sidebar-menu-name">Save as</span></span>
+                    <span><i className="fas fa-share"></i> <span className="sidebar-menu-name">Share</span></span>
                 </div>
                 <div className="sidebar-menu">
                     <div className="sidebar-menu-heading">
-                        <span onClick={() => this.props.open('products')}>Products</span>
-                        <div className="sidebar-menu-toggle" onClick={() => this.props.open('products')}><i className="fas fa-plus"></i></div>
+                        <span className="sidebar-menu-name" onClick={() => this.props.open('products')}>Products</span>
+                        <div className="sidebar-menu-toggle" onClick={() => this.props.open('products')}><i className={ (this.props.menuIcon ? 'fas fa-minus' : 'fas fa-plus') }></i></div>
                     </div>
                     <div className={this.props.subProducts }>
                         {
                             ProductCategories.map((item) => (
-                                 <span key={item.id} className={ (this.props.productActive === item.name) ? 'active' : '' } onClick={() => this.props.update(item.data, item.name)}><i className="fas fa-cube"></i> {item.name}</span>
+                                 <span key={item.id} className={ (this.props.productActive === item.name) ? 'active' : '' } onClick={() => this.props.update(item.data, item.name)}><i className="fas fa-cube"></i> <span className="sidebar-menu-name">{item.name}</span></span>
                             ))
                         }
 
@@ -41,17 +41,20 @@ class Sidebar extends Component {
                 </div>
                 <div className="sidebar-menu">
                     <div className="sidebar-menu-heading">
-                        <span onClick={() => this.props.open('collections')}>Collections</span>
+                        <span className="sidebar-menu-name" onClick={() => this.props.open('collections')}>Collections</span>
                         <div className="sidebar-menu-toggle" onClick={() => this.props.open('collections')}><i className="fas fa-plus"></i></div>
                     </div>
                     <div className={this.props.subCollections }>
-                        <span><i className="fas fa-cubes"></i> Cascade</span>
-                        <span><i className="fas fa-cubes"></i> Serria</span>
-                        <span><i className="fas fa-cubes"></i> Olympic</span>
+                        <span><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Cascades</span></span>
+                        <span><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Serria</span></span>
+                        <span><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Olympic</span></span>
                     </div>
                 </div>
                 <div className="sidebar-menu">
-                    <span><i className="fas fa-external-link-alt"></i> Publish to 3d</span>
+                    <span><i className="fas fa-external-link-alt"></i> <span className="sidebar-menu-name">Publish to 3d</span></span>
+                </div>
+                <div className="sidebar-menu help">
+                    <span><i className="far fa-question-circle"></i> <span className="sidebar-menu-name">Help</span></span>
                 </div>
             </div>
         );

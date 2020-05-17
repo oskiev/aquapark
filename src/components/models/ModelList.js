@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ModelInfo from './ModelInfo';
 import Product from './Product';
 import product1 from '../../assets/product1-small.png';
 import product2 from '../../assets/product2-small.png';
@@ -9,38 +10,53 @@ import product6 from '../../assets/product6-small.png';
 
 const data = {
     items1: [
-        { id: 1, name: 'Mt. Rainer', product: product1},
-        { id: 2, name: 'Mt. Hood', product: product2},
-        { id: 3, name: 'Mt. Baker', product: product3},
-        { id: 4, name: 'Fiqure 1', product: product4},
-        { id: 5, name: 'Fiqure 2', product: product5},
-        { id: 6, name: 'Fiqure 3', product: product6},
+        { id: 0, name: 'Mt.Rainier', product: product1},
+        { id: 1, name: 'Mt.Hood', product: product2},
+        { id: 2, name: 'Mt.Baker', product: product3},
+        { id: 3, name: 'Mt.Hood', product: product4},
+        { id: 4, name: 'Mt.Rainier', product: product5},
+        { id: 5, name: 'Mt.Hood', product: product6},
     ],
     items2: [
-        { id: 1, name: 'Mt. Rainer', product: product5},
-        { id: 4, name: 'Mt. Hood', product: product2},
-        { id: 3, name: 'Mt. Baker', product: product4},
+        { id: 0, name: 'Mt.Rainer', product: product5},
+        { id: 1, name: 'Mt.Hood', product: product2},
+        { id: 2, name: 'Mt.Baker', product: product4},
     ],
     items3: [
-        { id: 1, name: 'Mt. Rainer', product: product2},
-        { id: 2, name: 'Mt. Hood', product: product6},
-        { id: 3, name: 'Mt. Baker', product: product1},
-        { id: 4, name: 'Mt. Baker', product: product4},
-        { id: 5, name: 'Mt. Baker', product: product3},
+        { id: 0, name: 'Mt.Rainer', product: product2},
+        { id: 1, name: 'Mt.Hood', product: product6},
+        { id: 2, name: 'Mt.Baker', product: product1},
+        { id: 3, name: 'Mt.Baker', product: product4},
+        { id: 4, name: 'Mt.Baker', product: product3},
     ],
     items4: [
-        { id: 1, name: 'Mt. Rainer', product: product4},
-        { id: 2, name: 'Mt. Hood', product: product1},
+        { id: 0, name: 'Mt. Rainer', product: product4},
+        { id: 1, name: 'Mt. Hood', product: product1},
     ]
 }
-
 
 class ModelList extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            productList: [],
+            productList: data.items1,
+            showProductInfo: false,
+            productInfoName: '',
+        }
+        this.toggleProductInfo = this.toggleProductInfo.bind(this);
+    }
+
+    toggleProductInfo(itemName, force) {
+        if( force === 'force' ){
+            this.setState(state => ({
+                showProductInfo: false,
+            }));
+        } else {
+            this.setState(state => ({
+                productInfoName: itemName,
+                showProductInfo: ( ( state.productInfoName !== itemName ) ? true : !state.showProductInfo ),
+            }));
         }
     }
 
@@ -76,15 +92,19 @@ class ModelList extends Component {
     }
 
     render() {
-        const { productList } = this.state;
+        const { productList, productInfoName } = this.state;
+        const getProductInfo = this.state.showProductInfo ? 'model-info-wrap show' : 'model-info-wrap hidden';
 
         return (
-            <div className="model-wrap">
-                <div className="model-inner">
-                    { productList.map((item, index) => (
-                        <Product key={item.id} item={item} />
-                    ))}
+            <div className="wrapper">
+                <div className="model-wrap">
+                    <div className="model-inner">
+                        { productList.map((item, index) => (
+                            <Product key={item.id} item={item} openProduct={this.toggleProductInfo}/>
+                        ))}
+                    </div>
                 </div>
+                <div className={getProductInfo}><ModelInfo productInfo={productInfoName} openProduct={this.toggleProductInfo}/></div>
             </div>
         );
     }

@@ -6,14 +6,15 @@
 
     &-wrap {
         position: relative;
-        width: 15%;
+        width: 250px;
         background: $white;
         z-index: 9;
-        transition: width 200ms ease;
+        transition: all 300ms;
+        right: -1px;
     }
 
     &-menu {
-        padding: 20px;
+        padding: 20px 23px;
         border-bottom: 1px solid #ddd;
 
         & > span,
@@ -23,16 +24,22 @@
             text-transform: uppercase;
             font-weight: 600;
             font-size: 0.9em;
-            padding-bottom: 12px;
+            padding-bottom: 13px;
             cursor: pointer;
 
+
+            &::selection {
+                user-select: none;
+                -moz-user-select: none;
+            }
             &:last-child {
                 padding-bottom: 0px;
             }
             i {
                 display: inline-block;
-                padding-right: 6px;
+                padding-right: 10px;
                 color: #393939;
+                font-size: 1.3em;
             }
             &:hover,
             &:hover i,
@@ -47,9 +54,6 @@
             align-items: center;
             justify-content: space-between;
 
-            &:hover {
-                color: $orange;
-            }
         }
         &-heading > span {
             font-weight: 700;

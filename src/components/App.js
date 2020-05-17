@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Header from './layouts/Header';
 import Sidebar from './layouts/Sidebar';
@@ -7,7 +7,6 @@ import Canvas from './layouts/Canvas';
 import Backend from 'react-dnd-html5-backend';
 import { DndProvider  } from 'react-dnd';
 import _ from 'lodash';
-import update from 'immutability-helper';
 
 
 class App extends Component {
@@ -17,12 +16,11 @@ class App extends Component {
 
       this.state = {
           sidebarIcons: false,
-          showProductLayer: false,
+          showProductLayer: true,
           sidebarSubProducts: true,
           sidebarSubCollections: false,
           sidebarProductActive: '',
           components: [],
-          dragProducts: [],
           productCat: '',
       }
       this.toggleSidebarIcons = this.toggleSidebarIcons.bind(this);
@@ -56,7 +54,6 @@ class App extends Component {
           }));
       }
   }
-
   onDrop(component, x, y) {
       const { components } = this.state;
 
@@ -66,32 +63,36 @@ class App extends Component {
           components: newComponentsList
       });
   }
-
-  moveProduct(id, component, x, y) {
-      const { components, dragProducts } = this.state;
+  moveProduct(newItem, id, component, x, y) {
+      const { components } = this.state;
       var s = new Set();
+      var cond = true;
 
-      components.map( (data, index) => {
+      // const o = { item: components.item, left: components.left, top: components.top };
+      // s.add(o);
+
+      components.forEach(function (data, index){
           if(data.item.id === id) {
               const newObj = { item: component, left: x, top: y };
               s.add(newObj);
           } else {
               const o = { item: data.item, left: data.left, top: data.top };
               s.add(o);
-
           }
-      })
+      });
       var a = Array.from(s);
       this.setState({
           components: a
       });
+
+       console.log(components);
 
   }
 
   render() {
     const sidebarClass = this.state.sidebarIcons ? 'content toggleIcons' : 'content';
     const showProduct = this.state.showProductLayer ? 'model-container show' : 'model-container hidden';
-    const sidebarSubProducts = this.state.sidebarSubProducts ? 'sidebar-menu-sub show' : 'sidebar-menu-sub';
+    const showSidebarSubProducts = this.state.sidebarSubProducts ? 'sidebar-menu-sub show' : 'sidebar-menu-sub';
     const sidebarSubCollections = this.state.sidebarSubCollections ? 'sidebar-menu-sub show' : 'sidebar-menu-sub';
     const { components, productCat, sidebarProductActive } = this.state;
 
@@ -101,7 +102,7 @@ class App extends Component {
         <DndProvider backend={Backend}>
             <div className={sidebarClass} >
                 <div className="sidebar-wrap">
-                    <Sidebar subProducts={sidebarSubProducts} subCollections={sidebarSubCollections} productActive={sidebarProductActive} open={this.toggleSubLayer} update={this.toggleProductLayer} />
+                    <Sidebar subProducts={showSidebarSubProducts} subCollections={sidebarSubCollections} productActive={sidebarProductActive} open={this.toggleSubLayer} update={this.toggleProductLayer} menuIcon={this.state.sidebarSubProducts} />
                     <div className={showProduct}>
                         <ModelList productCat={productCat} />
                     </div>

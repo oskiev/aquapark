@@ -1,8 +1,11 @@
-import React, { Component, useState  } from 'react';
+import React, { Component  } from 'react';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../ItemTypes';
 import ReactDOM from 'react-dom'
 import DraggableProduct from '../models/DraggableProduct';
+
+ var count = 0;
+ var a = {};
 
 const productTarget = {
     drop(props, monitor, component) {
@@ -14,22 +17,28 @@ const productTarget = {
              const alpha =  monitor.getSourceClientOffset();
              const pos = getCorrectDroppedOffsetValue(component, delta, alpha);
              props.onDrop(item, pos.x, pos.y);
+
+             let n = item.name;
+             let p = item.product;
+             a = { id: count, name: n, product: p };
+             count = count + 1;
         }
 
         if( type === 'draggableProduct' ){
 
-            component.props.components.map( (data) => {
+            component.props.components.forEach(function (data, index){
+
                 const delta1 = monitor.getDifferenceFromInitialOffset()
                 const l = Math.round(data.left + delta1.x)
                 const t = Math.round(data.top + delta1.y)
 
-                if(data.item.id == item.id){
-                    props.moveProduct(item.id, item, l, t);
+                if(data.item.id === item.id){
+                    props.moveProduct(a, item.id, item, l, t);
                 }
-            })
+            });
         }
 
-         return item;
+        return item;
     }
 }
 
@@ -42,7 +51,7 @@ const collect = (connect, monitor) => {
 class Canvas extends Component {
 
     render() {
-        const { connectDropTarget, components, drop } = this.props;
+        const { connectDropTarget, components } = this.props;
 
         return (
             connectDropTarget(

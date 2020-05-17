@@ -1,7 +1,10 @@
 .canvas {
     position: relative;
-    background: #d7d7d7;
-    width: 85%;
+    background: url('../assets/beach.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    flex-grow: 1;
     z-index: 8;
     transition: width 200ms ease;
     border: 1px solid #ddd;
@@ -22,6 +25,10 @@
         .model-product {
             max-width: 100%;
             margin-bottom: 0px;
+
+            &:before {
+                display: none;
+            }
         }
     }
     iframe {

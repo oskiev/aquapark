@@ -32,7 +32,18 @@ img {
 
     &.toggleIcons {
 
-        .sidebar { width: 5%; }
-        .canvas { width: 95%; }
+        .sidebar {
+
+            &-wrap { width: auto; }
+            &-menu {
+                &-name {
+                    display: none;
+                }
+                & > span i,
+                &-sub > span i {
+                    padding-right: 0px;
+                }
+            }
+        }
     }
 }
