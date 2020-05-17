@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { DragSource, DragPreviewImage } from 'react-dnd';
 import ItemTypes from '../ItemTypes';
 
@@ -12,6 +12,8 @@ function getStyles(left, top, isDragging) {
         height: isDragging ? 0 : '',
     }
 }
+
+var newID = 0;
 
 const productSource = {
     beginDrag(props, monitor, component) {
@@ -30,14 +32,14 @@ function collect(connect, monitor) {
 
 const DraggableProduct = DragSource(ItemTypes.PRODUCTDRAG,productSource,collect)(
     props=>{
-        const { isDragging, connectDragSource, connectDragPreview, drag, item, left, top } = props;
+        const { isDragging, connectDragSource, connectDragPreview, item, left, top } = props;
 
         return connectDragSource(
-            <div style={getStyles(left, top, isDragging)} ref={drag}>
+            <div style={getStyles(item.left, item.top, isDragging)}>
              {
                  <div key={item.id} className="model-product">
-                     <DragPreviewImage src={item.product} connect={connectDragPreview} />
-                     <img src={item.product} className="model-img" alt={item.name} draggable="false" />
+                     <DragPreviewImage src={item.item.product} connect={connectDragPreview} />
+                     <img src={item.item.product} className="model-img" alt={item.item.name} draggable="false" />
                  </div>
              }
             </div>

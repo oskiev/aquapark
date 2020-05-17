@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import './App.css';
 import Header from './layouts/Header';
 import Sidebar from './layouts/Sidebar';
@@ -7,7 +7,6 @@ import Canvas from './layouts/Canvas';
 import Backend from 'react-dnd-html5-backend';
 import { DndProvider  } from 'react-dnd';
 import _ from 'lodash';
-
 
 class App extends Component {
 
@@ -22,12 +21,14 @@ class App extends Component {
           sidebarProductActive: '',
           components: [],
           productCat: '',
+          newID: 0,
       }
       this.toggleSidebarIcons = this.toggleSidebarIcons.bind(this);
       this.toggleProductLayer = this.toggleProductLayer.bind(this);
       this.toggleSubLayer = this.toggleSubLayer.bind(this);
       this.onDrop = this.onDrop.bind(this);
       this.moveProduct = this.moveProduct.bind(this);
+      this.updateDragProducts = this.updateDragProducts.bind(this);
   }
 
   toggleSidebarIcons() {
@@ -55,28 +56,31 @@ class App extends Component {
       }
   }
   onDrop(component, x, y) {
-      const { components } = this.state;
+      const { components, newID } = this.state;
+      const id = component.id;
 
-      const newObj = { item: component, left: x, top: y };
+      const newObj = {id: newID, item: component, left: x, top: y};
       const newComponentsList = _.concat([], components, newObj);
-      this.setState({
-          components: newComponentsList
-      });
+      // this.setState({
+      //     components: newComponentsList
+      // });
+      this.setState((state) => ({
+         newID: state.newID + 1,
+         components: newComponentsList
+      }));
+
+      console.log(this.state.components);
   }
-  moveProduct(newItem, id, component, x, y) {
+  moveProduct(id, item, x, y) {
       const { components } = this.state;
-      var s = new Set();
-      var cond = true;
+      const s = new Set();
 
-      // const o = { item: components.item, left: components.left, top: components.top };
-      // s.add(o);
-
-      components.forEach(function (data, index){
-          if(data.item.id === id) {
-              const newObj = { item: component, left: x, top: y };
-              s.add(newObj);
+      components.forEach(function(data, index){
+          if(index === id) {
+              const n = { id: data.id, item: data.item, left: x, top: y };
+              s.add(n);
           } else {
-              const o = { item: data.item, left: data.left, top: data.top };
+              const o = { id: data.id, item: data.item, left: data.left, top: data.top };
               s.add(o);
           }
       });
@@ -85,8 +89,14 @@ class App extends Component {
           components: a
       });
 
-       console.log(components);
+      //console.log(this.state.components);
+  }
+  updateDragProducts(newItem) {
+      const { components } = this.state;
 
+      this.setState({
+          components: newItem
+      });
   }
 
   render() {
@@ -108,7 +118,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="canvas">
-                    <Canvas onDrop={this.onDrop} moveProduct={this.moveProduct} components={components} />
+                    <Canvas onDrop={this.onDrop} updateComponent={this.updateDragProducts} moveProduct={this.moveProduct} components={components} />
                 </div>
             </div>
         </DndProvider>

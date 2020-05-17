@@ -5,7 +5,13 @@ import ItemTypes from '../ItemTypes';
 const productSource = {
     beginDrag(props, monitor, component) {
         const item = {...props.item};
-        return item;
+        const newItem = {
+            id: item.id,
+            item: item,
+            left: 0,
+            top: 0,
+        }
+        return newItem;
     },
 }
 

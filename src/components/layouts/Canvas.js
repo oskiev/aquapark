@@ -5,7 +5,9 @@ import ReactDOM from 'react-dom'
 import DraggableProduct from '../models/DraggableProduct';
 
  var count = 0;
- var a = {};
+ var b = {};
+ var store = new Set();
+ var dragItems = {};
 
 const productTarget = {
     drop(props, monitor, component) {
@@ -16,27 +18,36 @@ const productTarget = {
              const delta = monitor.getInitialSourceClientOffset();
              const alpha =  monitor.getSourceClientOffset();
              const pos = getCorrectDroppedOffsetValue(component, delta, alpha);
-             props.onDrop(item, pos.x, pos.y);
 
-             let n = item.name;
-             let p = item.product;
-             a = { id: count, name: n, product: p };
-             count = count + 1;
+             props.onDrop(item.item, pos.x, pos.y);
+
+             // let i = item.item.id;
+             // let n = item.item.name;
+             // let p = item.item.product;
+             //
+             // b = { id: count, item: { id: i, name: n, product: p }, left: pos.x, top: pos.y };
+             // store.add(b);
+             // count = count + 1;
+             //
+             // dragItems = Array.from(store);
+             //
+             // props.updateComponent(dragItems);
         }
 
         if( type === 'draggableProduct' ){
 
-            component.props.components.forEach(function (data, index){
+            const x = item.left;
+            const y = item.top;
 
-                const delta1 = monitor.getDifferenceFromInitialOffset()
-                const l = Math.round(data.left + delta1.x)
-                const t = Math.round(data.top + delta1.y)
+            const delta1 = monitor.getDifferenceFromInitialOffset()
+            const l = Math.round(x + delta1.x)
+            const t = Math.round(y + delta1.y)
 
-                if(data.item.id === item.id){
-                    props.moveProduct(a, item.id, item, l, t);
-                }
-            });
+            const id = item.id;
+            props.moveProduct(id, item, l, t);
         }
+
+        //console.log(item);
 
         return item;
     }
@@ -59,7 +70,7 @@ class Canvas extends Component {
                     {
                         components.map( (data, index) => {
                             return (
-                                <DraggableProduct key={index} item={data.item} left={data.left} top={data.top} components={components} />
+                                <DraggableProduct key={index} item={data} components={components} />
                             )
                         })
                     }
