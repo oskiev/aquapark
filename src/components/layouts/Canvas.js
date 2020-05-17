@@ -4,11 +4,6 @@ import ItemTypes from '../ItemTypes';
 import ReactDOM from 'react-dom'
 import DraggableProduct from '../models/DraggableProduct';
 
- var count = 0;
- var b = {};
- var store = new Set();
- var dragItems = {};
-
 const productTarget = {
     drop(props, monitor, component) {
          const item = monitor.getItem();
@@ -20,18 +15,6 @@ const productTarget = {
              const pos = getCorrectDroppedOffsetValue(component, delta, alpha);
 
              props.onDrop(item.item, pos.x, pos.y);
-
-             // let i = item.item.id;
-             // let n = item.item.name;
-             // let p = item.item.product;
-             //
-             // b = { id: count, item: { id: i, name: n, product: p }, left: pos.x, top: pos.y };
-             // store.add(b);
-             // count = count + 1;
-             //
-             // dragItems = Array.from(store);
-             //
-             // props.updateComponent(dragItems);
         }
 
         if( type === 'draggableProduct' ){
@@ -46,8 +29,6 @@ const productTarget = {
             const id = item.id;
             props.moveProduct(id, item, l, t);
         }
-
-        //console.log(item);
 
         return item;
     }

@@ -25,6 +25,7 @@
     &-wrap {
         background: $white;
         height: 100%;
+        overflow-y: auto;
     }
     span {
         display: block;

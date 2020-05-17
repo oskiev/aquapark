@@ -28,7 +28,6 @@ class App extends Component {
       this.toggleSubLayer = this.toggleSubLayer.bind(this);
       this.onDrop = this.onDrop.bind(this);
       this.moveProduct = this.moveProduct.bind(this);
-      this.updateDragProducts = this.updateDragProducts.bind(this);
   }
 
   toggleSidebarIcons() {
@@ -61,15 +60,11 @@ class App extends Component {
 
       const newObj = {id: newID, item: component, left: x, top: y};
       const newComponentsList = _.concat([], components, newObj);
-      // this.setState({
-      //     components: newComponentsList
-      // });
+
       this.setState((state) => ({
          newID: state.newID + 1,
          components: newComponentsList
       }));
-
-      console.log(this.state.components);
   }
   moveProduct(id, item, x, y) {
       const { components } = this.state;
@@ -89,14 +84,6 @@ class App extends Component {
           components: a
       });
 
-      //console.log(this.state.components);
-  }
-  updateDragProducts(newItem) {
-      const { components } = this.state;
-
-      this.setState({
-          components: newItem
-      });
   }
 
   render() {
@@ -118,7 +105,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="canvas">
-                    <Canvas onDrop={this.onDrop} updateComponent={this.updateDragProducts} moveProduct={this.moveProduct} components={components} />
+                    <Canvas onDrop={this.onDrop} moveProduct={this.moveProduct} components={components} />
                 </div>
             </div>
         </DndProvider>
