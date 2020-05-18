@@ -10,6 +10,7 @@
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "1.1.4"
   },
   "scripts": {
@@ -21,5 +22,6 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {}
 }

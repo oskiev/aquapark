@@ -1,44 +1,7 @@
 .canvas {
     position: relative;
-    background: url('../assets/beach.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom center;
     flex-grow: 1;
     z-index: 8;
-    transition: width 200ms ease;
-    border: 1px solid #ddd;
-    text-align: center;
-    color: $black;
-    font-size: 30px;
-    font-weight: 700;
+    transition: width 150ms ease;
 
-    img {
-        display: block;
-        margin: auto;
-    }
-    .target {
-        position: relative;
-        width: 100%;
-        height: 100%;
-
-        .model-product {
-            max-width: 100%;
-            margin-bottom: 0px;
-
-            &:before {
-                display: none;
-            }
-        }
-    }
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: 0px;
-        z-index: -1;
-    }
 }

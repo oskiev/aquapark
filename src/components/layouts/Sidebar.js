@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCategories = [
     { id: 1, name: 'Climbing/Sliding', data: 'items1' },
@@ -10,21 +11,29 @@ const ProductCategories = [
     { id: 7, name: 'Accessesories', data: 'items2' },
 ]
 
-
+//onClick={this.props.onBuild}
 class Sidebar extends Component {
     render() {
 
         return (
             <div className='sidebar'>
                 <div className='sidebar-menu'>
-                    <span><i className="fas fa-file-alt"></i> <span className="sidebar-menu-name">New Build</span></span>
-                    <span><i className="fas fa-folder-open"></i> <span className="sidebar-menu-name">Open</span></span>
+                    <Link to="/new-aquapark" className="sidebar-menu-wrap first" onClick={this.props.onBuild}><i className="fas fa-file-alt"></i> <span className="sidebar-menu-name">New Build</span></Link>
+                    <a className="sidebar-menu-wrap"><i className="fas fa-folder-open"></i> <span className="sidebar-menu-name">Open</span></a>
                 </div>
-                <div className="sidebar-menu">
-                    <span><i className="fas fa-save"></i> <span className="sidebar-menu-name">Save</span></span>
-                    <span><i className="fas fa-save"></i> <span className="sidebar-menu-name">Save as</span></span>
-                    <span><i className="fas fa-share"></i> <span className="sidebar-menu-name">Share</span></span>
-                </div>
+                {
+                    (() => {
+                        if(this.props.build && !this.props.home){
+                            return (
+                                <div className="sidebar-menu">
+                                    <span className="sidebar-menu-wrap"><i className="fas fa-save"></i> <span className="sidebar-menu-name">Save</span></span>
+                                    <span className="sidebar-menu-wrap"><i className="fas fa-save"></i> <span className="sidebar-menu-name">Save as</span></span>
+                                    <span className="sidebar-menu-wrap"><i className="fas fa-share"></i> <span className="sidebar-menu-name">Share</span></span>
+                                </div>
+                            )
+                        }
+                    })()
+                }
                 <div className="sidebar-menu">
                     <div className="sidebar-menu-heading">
                         <span className="sidebar-menu-name" onClick={() => this.props.open('products')}>Products</span>
@@ -33,7 +42,7 @@ class Sidebar extends Component {
                     <div className={this.props.subProducts }>
                         {
                             ProductCategories.map((item) => (
-                                 <span key={item.id} className={ (this.props.productActive === item.name) ? 'active' : '' } onClick={() => this.props.update(item.data, item.name)}><i className="fas fa-cube"></i> <span className="sidebar-menu-name">{item.name}</span></span>
+                                 <span key={item.id} className={ (this.props.productActive === item.name) ? 'sidebar-menu-wrap active' : 'sidebar-menu-wrap' } onClick={() => this.props.update(item.data, item.name)}><i className="fas fa-cube"></i> <span className="sidebar-menu-name">{item.name}</span></span>
                             ))
                         }
 
@@ -45,16 +54,16 @@ class Sidebar extends Component {
                         <div className="sidebar-menu-toggle" onClick={() => this.props.open('collections')}><i className="fas fa-plus"></i></div>
                     </div>
                     <div className={this.props.subCollections }>
-                        <span><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Cascades</span></span>
-                        <span><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Serria</span></span>
-                        <span><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Olympic</span></span>
+                        <span className="sidebar-menu-wrap"><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Cascades</span></span>
+                        <span className="sidebar-menu-wrap"><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Serria</span></span>
+                        <span className="sidebar-menu-wrap"><i className="fas fa-cubes"></i> <span className="sidebar-menu-name">Olympic</span></span>
                     </div>
                 </div>
                 <div className="sidebar-menu">
-                    <span><i className="fas fa-external-link-alt"></i> <span className="sidebar-menu-name">Publish to 3d</span></span>
+                    <span className="sidebar-menu-wrap"><i className="fas fa-external-link-alt"></i> <span className="sidebar-menu-name">Publish to 3d</span></span>
                 </div>
                 <div className="sidebar-menu help">
-                    <span><i className="far fa-question-circle"></i> <span className="sidebar-menu-name">Help</span></span>
+                    <span className="sidebar-menu-wrap"><i className="far fa-question-circle"></i> <span className="sidebar-menu-name">Help</span></span>
                 </div>
             </div>
         );

@@ -1,0 +1,63 @@
+a {
+    text-decoration: none;
+
+    &:visited,
+    &:focus {
+        color: inherit;
+    }
+}
+
+button {
+    display: inline-block;
+    border: 0px;
+    cursor: pointer;
+
+    &:focus,
+    &:active,
+    &:hover {
+        outline: 0px;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.85em 1.5em;
+    border: 2px solid $orange;
+    border-radius: 3px;
+    background: transparent;
+    font-size: 1.2em;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    color: #fff;
+    min-width: 300px;
+
+    &:visited, &:focus {
+        color: #fff;
+    }
+    &:first-child {
+        margin-right: 30px;
+    }
+    &--orange {
+        background: $orange;
+        color: #fff;
+        border-color: $orange;
+    }
+    &--black {
+        background: $black;
+        color: #fff;
+        border-color: $black;
+    }
+    &--gray {
+        background: $darkgray;
+        color: #fff;
+        border-color: $darkgray;
+    }
+    &:hover {
+        background: $black;
+        color: #fff;
+        border-color: $black;
+    }
+}

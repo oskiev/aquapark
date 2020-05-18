@@ -1,10 +1,12 @@
 @import 'styles/colors';
 @import 'styles/typography';
+@import 'styles/elements';
 @import 'styles/mixins';
 @import 'styles/header';
 @import 'styles/sidebar';
 @import 'styles/models';
 @import 'styles/canvas';
+@import 'styles/welcome';
 
 * {
     box-sizing: border-box;
@@ -27,17 +29,18 @@ img {
     display: flex;
     width: 100%;
     height: 100%;
-    padding-top: 93px;
+    padding-top: 82px;
     max-height: 100vh;
 
     &.toggleIcons {
 
         .sidebar {
 
-            &-wrap { width: auto; }
+            &-wrap { width: 68px; }
             &-menu {
                 &-name {
                     display: none;
+                    opacity: 0;
                 }
                 & > span i,
                 &-sub > span i {
@@ -46,4 +49,36 @@ img {
             }
         }
     }
+}
+
+.target {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/beach.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+
+    .model-product {
+        max-width: 100%;
+        margin-bottom: 0px;
+
+        &:before {
+            display: none;
+        }
+    }
+    img {
+        margin: auto;
+    }
+}
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    z-index: -1;
 }

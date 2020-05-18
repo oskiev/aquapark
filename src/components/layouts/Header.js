@@ -9,7 +9,7 @@ class Header extends Component {
                     <div className="header-toggle">
                         <div onClick={this.props.onClick}><i className="fas fa-bars"></i></div>
                     </div>
-                    <img src={logo} className="header-logo-img" alt="Union AquaPark" />
+                    <a href="/"><img src={logo} className="header-logo-img" alt="Union AquaPark" /></a>
                 </div>
                 <div className="header-info">Aquapark Name Here</div>
                 <div className="header-menu"></div>

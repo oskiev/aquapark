@@ -41,7 +41,14 @@ const collect = (connect, monitor) => {
 }
 
 class Canvas extends Component {
+    constructor(props) {
+        super(props);
 
+         this.removeProduct = this.removeProduct.bind(this);
+    }
+    removeProduct(id) {
+        this.props.removeProduct(id)
+    }
     render() {
         const { connectDropTarget, components } = this.props;
 
@@ -51,7 +58,7 @@ class Canvas extends Component {
                     {
                         components.map( (data, index) => {
                             return (
-                                <DraggableProduct key={index} item={data} components={components} />
+                                <DraggableProduct key={index} item={data} components={components} removeDragProduct={this.removeProduct}/>
                             )
                         })
                     }

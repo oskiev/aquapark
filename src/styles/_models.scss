@@ -25,6 +25,7 @@
     &-wrap {
         background: $white;
         height: 100%;
+        border-right: 1px solid #ddd;
         overflow-y: auto;
     }
     span {
@@ -40,7 +41,7 @@
         max-width: 160px;
         margin: auto;
         margin-bottom: 16px;
-        cursor: move;
+        cursor: grab;
 
         &:before {
             content: '';
@@ -77,6 +78,7 @@
             padding: 20px;
             z-index: -1;
             transition: all 130ms;
+            border-right: 1px solid #ddd;
 
             &.hidden {
                 right: 0;
@@ -126,7 +128,7 @@
         &-close {
             position: absolute;
             top: 80px;
-            right: -40px;
+            right: -41px;
             background: #040707;
             padding: 8px 12px;
             line-height: 1;
